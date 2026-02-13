@@ -19,6 +19,12 @@
     padding: 0;
 }
 
+html {
+    overflow: hidden;
+    height: auto;
+}
+
+
 body {
     font-family: 'Saira Semi Condensed', sans-serif;
 

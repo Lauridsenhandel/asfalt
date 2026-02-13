@@ -105,8 +105,13 @@
     <script>
         (function () {
             function sendHeight() {
-                const height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-                window.parent.postMessage({ type: "asfaltHeight", height: height }, "*");
+                // Measure the container height + vertical padding (2rem top + 2rem bottom = approx 64px)
+                // Using 80px buffer to be safe and avoid scrollbars
+                const container = document.querySelector('.container');
+                if (container) {
+                    const height = container.offsetHeight + 80;
+                    window.parent.postMessage({ type: "asfaltHeight", height: height }, "*");
+                }
             }
 
             let resizeTimer;
