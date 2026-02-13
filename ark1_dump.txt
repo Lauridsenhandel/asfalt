@@ -1,0 +1,23 @@
+Reading Sheet: Ark1
+------------------------------
+CELLS WITH VALUES/FORMULAS:
+------------------------------
+Cell B2: Beregning forbrug af Instamak Reparationsasfalt
+Cell B4: Vælg Asfalttype -->
+Cell D4: 0-5 mm Rød
+Cell B6: Hulstørrelse
+Cell B7: Indtast Længde i mm.  --->
+Cell D7: 1000
+Cell B8: Indtast Bredde i mm. --->
+Cell D8: 1000
+Cell B9: Indtast Dybde i mm. --->
+Cell D9: 32.5
+Cell B12: Mængde i kg.
+Cell C12: Kg
+Cell D12: Spande
+Cell B13: Ukomprimeret
+Cell C13: =VLOOKUP(D$4,'Ark2'!$A$2:$E$7,4,FALSE)*$D$7*$D$8*$D$9/1000
+Cell D13: =ROUNDUP(C13/25,0)
+Cell B14: Komprimeret
+Cell C14: =VLOOKUP(D$4,'Ark2'!$A$2:$E$7,5,FALSE)*$D$7*$D$8*$D$9/1000
+Cell D14: =ROUNDUP(C14/25,0)

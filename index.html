@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asfalt Beregner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-gradient"></div>
+    
+    <main class="container">
+        <header>
+            <h1>Asfalt Beregner</h1>
+            <p>Beregn nemt forbrug af Instamak Reparationsasfalt</p>
+        </header>
+
+        <div class="calculator-grid">
+            <!-- Settings Card -->
+            <section class="card input-card">
+                <h2>Indtast Dimensioner</h2>
+                
+                <div class="form-group">
+                    <label for="asphaltType">Asfalttype</label>
+                    <div class="select-wrapper">
+                        <select id="asphaltType">
+                            <option value="0-3 mm Hvid">0-3 mm Hvid</option>
+                            <option value="0-5 mm Rød" selected>0-5 mm Rød</option>
+                            <option value="0-8 mm Grøn">0-8 mm Grøn</option>
+                            <option value="0-11 mm Blå">0-11 mm Blå</option>
+                            <option value="0-16 mm Gul">0-16 mm Gul</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="length">Længde <span class="unit">(mm)</span></label>
+                    <input type="number" id="length" value="1000" min="0" placeholder="1000">
+                </div>
+
+                <div class="form-group">
+                    <label for="width">Bredde <span class="unit">(mm)</span></label>
+                    <input type="number" id="width" value="1000" min="0" placeholder="1000">
+                </div>
+
+                <div class="form-group">
+                    <label for="depth">Dybde <span class="unit">(mm)</span></label>
+                    <input type="number" id="depth" value="32.5" min="0" step="0.1" placeholder="32.5">
+                </div>
+            </section>
+
+            <!-- Results Card -->
+            <section class="card result-card">
+                <h2>Resultat</h2>
+                
+                <div class="result-group">
+                    <h3>Ukomprimeret</h3>
+                    <div class="result-value">
+                        <span id="uncomp-weight">0</span>
+                        <span class="unit">kg</span>
+                    </div>
+                    <div class="result-sub">
+                        <span id="uncomp-buckets">0</span>
+                        <span class="unit-text">Spande (25kg)</span>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="result-group highlight">
+                    <h3>Komprimeret</h3>
+                    <div class="result-value">
+                        <span id="comp-weight">0</span>
+                        <span class="unit">kg</span>
+                    </div>
+                    <div class="result-sub">
+                        <span id="comp-buckets">0</span>
+                        <span class="unit-text">Spande (25kg)</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
