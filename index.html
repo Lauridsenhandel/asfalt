@@ -102,6 +102,34 @@
     </main>
 
     <script src="script.js"></script>
+    <script>
+        (function () {
+            function sendHeight() {
+                const height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+                window.parent.postMessage({ type: "asfaltHeight", height: height }, "*");
+            }
+
+            let resizeTimer;
+            function debouncedSendHeight() {
+                if (resizeTimer) return;
+                resizeTimer = requestAnimationFrame(() => {
+                    sendHeight();
+                    resizeTimer = null;
+                });
+            }
+
+            // Events
+            window.addEventListener('load', sendHeight);
+            window.addEventListener('resize', debouncedSendHeight);
+
+            // MutationObserver to catch DOM changes
+            const observer = new MutationObserver(debouncedSendHeight);
+            observer.observe(document.body, { attributes: true, childList: true, subtree: true });
+
+            // Initial send
+            sendHeight();
+        })();
+    </script>
 </body>
 
 </html>
