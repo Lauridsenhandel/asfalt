@@ -1,14 +1,16 @@
 :root {
-    --primary-color: #2563eb;
-    --primary-hover: #1d4ed8;
-    --bg-gradient-start: #0f172a;
-    --bg-gradient-end: #1e293b;
-    --card-bg: rgba(255, 255, 255, 0.95);
-    --text-main: #1e293b;
-    --text-muted: #64748b;
+    --primary-color: #2F4858;
+    --primary-hover: #1e3340;
+    --accent-color: #007E48;
+    --bg-gradient-start: #f8f9fa;
+    --bg-gradient-end: #e9ecef;
+    --card-bg: rgba(255, 255, 255, 0.98);
+    --text-main: #2F4858;
+    --text-muted: #576b77;
     --border-color: #e2e8f0;
-    --highlight-bg: #eff6ff;
-    --highlight-text: #1e40af;
+    --highlight-bg: #e6f2ed;
+    --highlight-text: #007E48;
+
 }
 
 * {
@@ -18,7 +20,8 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Saira Semi Condensed', sans-serif;
+
     color: var(--text-main);
     min-height: 100vh;
     display: flex;
@@ -111,7 +114,8 @@ header p {
     font-size: 0.8em;
 }
 
-input, select {
+input,
+select {
     width: 100%;
     padding: 0.75rem 1rem;
     border: 1px solid var(--border-color);
@@ -123,10 +127,12 @@ input, select {
     color: var(--text-main);
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
     outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(0, 126, 72, 0.1);
+
 }
 
 .select-wrapper {
@@ -170,6 +176,7 @@ input:focus, select:focus {
     line-height: 1;
     margin-bottom: 0.25rem;
 }
+
 .result-group.highlight .result-value {
     color: var(--highlight-text);
 }
@@ -185,6 +192,7 @@ input:focus, select:focus {
     color: var(--text-main);
     font-weight: 600;
 }
+
 .result-group.highlight .result-sub {
     color: var(--highlight-text);
 }
@@ -194,8 +202,10 @@ input:focus, select:focus {
     font-size: 0.9rem;
     color: var(--text-muted);
 }
+
 .result-group.highlight .unit-text {
-    color: rgba(30, 64, 175, 0.7);
+    color: rgba(0, 126, 72, 0.8);
+
 }
 
 .divider {
