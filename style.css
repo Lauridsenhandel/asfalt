@@ -23,13 +23,17 @@ body {
     font-family: 'Saira Semi Condensed', sans-serif;
 
     color: var(--text-main);
-    min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    /* Changed from center to top */
     position: relative;
     overflow-x: hidden;
+    padding-top: 2rem;
+    /* Add some top spacing instead of centering */
+    padding-bottom: 2rem;
 }
+
 
 .background-gradient {
     position: fixed;
