@@ -51,7 +51,6 @@ header {
     text-align: center;
     margin-bottom: 3rem;
     color: #007e48;
-
 }
 
 header h1 {
@@ -70,6 +69,8 @@ header p {
 .calculator-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
+
+
     gap: 2rem;
 }
 
@@ -119,6 +120,7 @@ input,
 select {
     width: 100%;
     padding: 0.75rem 1rem;
+
     border: 1px solid var(--border-color);
     border-radius: 0.75rem;
     font-size: 1rem;
@@ -213,4 +215,99 @@ select:focus {
     height: 1px;
     background: var(--border-color);
     margin: 1.5rem 0;
+}
+
+/* Product Display Styles */
+.product-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.product-content {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    max-width: 100%;
+}
+
+.product-image-wrapper {
+    flex: 0 0 200px;
+    display: flex;
+    justify-content: center;
+}
+
+.product-image-wrapper img {
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: contain;
+    border-radius: 0.5rem;
+}
+
+.product-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.product-details h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+}
+
+.product-sku {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    font-family: inherit;
+
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.cta-button:hover {
+    background-color: #006035;
+    /* Darker shade of accent */
+    transform: translateY(-1px);
+}
+
+.cta-button:active {
+    transform: translateY(0);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px) {
+    .product-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+
+    .product-details {
+        align-items: center;
+    }
 }

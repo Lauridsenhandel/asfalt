@@ -1,12 +1,43 @@
 // Data from Excel 'Ark2'
-// u = Ukomprimeret (Volumen per 25kg bag)
-// k = Komprimeret (Volumen per 25kg bag)
 const asphaltTypes = {
     "0-3 mm Hvid": { u: 17500, k: 14900 },
     "0-5 mm Rød": { u: 16500, k: 14000 },
     "0-8 mm Grøn": { u: 15500, k: 13200 },
     "0-11 mm Blå": { u: 15000, k: 12800 },
     "0-16 mm Gul": { u: 14500, k: 12300 }
+};
+
+const productData = {
+    "0-3 mm Hvid": {
+        sku: "490840503",
+        link: "https://www.lhi.dk/produkter/kloak/reparationsasfalt/reparationsasfalt/reparationsasfalt-0-3-mm-hvid",
+        img: "images/490840503.png",
+        name: "Reparationsasfalt 0-3 mm (hvid)"
+    },
+    "0-5 mm Rød": {
+        sku: "490840505",
+        link: "https://www.lhi.dk/produkter/kloak/reparationsasfalt/reparationsasfalt/reparationsasfalt-0-5-mm-roed",
+        img: "images/490840505.png",
+        name: "Reparationsasfalt 0-5 mm (rød)"
+    },
+    "0-8 mm Grøn": {
+        sku: "490840508",
+        link: "https://www.lhi.dk/produkter/kloak/reparationsasfalt/reparationsasfalt/reparationsasfalt-0-8-mm-groen",
+        img: "images/490840508.png",
+        name: "Reparationsasfalt 0-8 mm (grøn)"
+    },
+    "0-11 mm Blå": {
+        sku: "490840511",
+        link: "https://www.lhi.dk/produkter/kloak/reparationsasfalt/reparationsasfalt/reparationsasfalt-0-11-mm-blaa",
+        img: "images/490840511.png",
+        name: "Reparationsasfalt 0-11 mm (blå)"
+    },
+    "0-16 mm Gul": {
+        sku: "490840516",
+        link: "https://www.lhi.dk/produkter/kloak/reparationsasfalt/reparationsasfalt/reparationsasfalt-0-16-mm-gul",
+        img: "images/490840516.png",
+        name: "Reparationsasfalt 0-16 mm (gul)"
+    }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -22,14 +53,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const compWeightEl = document.getElementById('comp-weight');
     const compBucketsEl = document.getElementById('comp-buckets');
 
+    // Product Display Elements
+    const productDisplaySection = document.getElementById('product-display');
+    const productImg = document.getElementById('product-img');
+    const productTitle = document.getElementById('product-title');
+    const productId = document.getElementById('product-id');
+    const productLink = document.getElementById('product-link');
+
     function calculate() {
         const type = typeSelect.value;
         const length = parseFloat(lengthInput.value) || 0;
         const width = parseFloat(widthInput.value) || 0;
         const depth = parseFloat(depthInput.value) || 0;
 
-        // Calculate Volume in cm3
-        // Input is in mm, so (mm * mm * mm) / 1000 = cm3
+        // Update Product Display
+        updateProductDisplay(type);
+
         const volumeCm3 = (length * width * depth) / 1000;
 
         if (volumeCm3 <= 0) {
@@ -40,31 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const stats = asphaltTypes[type];
         if (!stats) return;
 
-        // Uncompressed Calculation
-        // Logic: Bags = Ceil(Volume / VolumePerBag)
-        // Weight = Volume * (25 / VolumePerBag). Wait, checking Excel again.
-        // Excel Cell C13 (Weight) = VLOOKUP(...) * Volume / 1000. 
-        // VLOOKUP returns a value. Let's look at the sheet again.
-        // In Ark2, Column B is "Volumen" (Values like 16500). Wait.
-        // Let's re-verify the logic from the Excel dump.
-
-        // "Cell D3: =25/B3". B3 is 17500. So D3 is Density (kg/cm3) maybe? or kg/unit?
-        // if B3 is Volume for 25kg. Then Density = 25 / 17500 kg/cm3.
-
-        // Excel Ark1 Formula C13 (Weight):
-        // =VLOOKUP(D$4,'Ark2'!$A$2:$E$7,4,FALSE)*$D$7*$D$8*$D$9/1000
-        // Parameters:
-        // D4 = Type Name
-        // Range A2:E7. Col 4 is Column D.
-        // Col D in Ark2 is "=25/B" (where B is Volume for 25kg).
-        // So Col D is Density (kg/cm3).
-        // Formula = Density * (L*W*D)/1000 [Volume cm3].
-        // So Weight = Density * Volume_cm3. Correct.
-
-        // Excel Ark1 Formula D13 (Buckets):
-        // =ROUNDUP(C13/25,0) -> Ceil(Weight / 25).
-
-        // So my logic:
+        // Density Calc
         const densityUncomp = 25 / stats.u; // kg per cm3
         const densityComp = 25 / stats.k;   // kg per cm3
 
@@ -75,13 +90,24 @@ document.addEventListener('DOMContentLoaded', () => {
         const bucketsComp = Math.ceil(weightComp / 25);
 
         // Update UI
-        // Format weight with 1 decimal if needed, or 2. Excel shows whole numbers usually or 2 decimals.
-        // Let's use 2 decimals for precision.
         uncompWeightEl.textContent = weightUncomp.toLocaleString('da-DK', { maximumFractionDigits: 2 });
         uncompBucketsEl.textContent = bucketsUncomp;
 
         compWeightEl.textContent = weightComp.toLocaleString('da-DK', { maximumFractionDigits: 2 });
         compBucketsEl.textContent = bucketsComp;
+    }
+
+    function updateProductDisplay(type) {
+        const data = productData[type];
+        if (data) {
+            productDisplaySection.style.display = 'flex';
+            productImg.src = data.img;
+            productTitle.textContent = data.name;
+            productId.textContent = data.sku;
+            productLink.href = data.link;
+        } else {
+            productDisplaySection.style.display = 'none';
+        }
     }
 
     function resetResults() {
